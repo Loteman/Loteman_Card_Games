@@ -184,7 +184,7 @@
 
 <header>
   <h1>🃏 משחקי הקלפים של לוטמן</h1>
-  <p>20 משחקי קלפים עם כללים מלאים בעברית</p>
+  <p>הבית של כל משחקי הקלפים שתצטרכו</p>
 </header>
 
 <div class="filters">
@@ -643,11 +643,15 @@ function updateSlider() {
   let min = parseInt(sliderMin.value);
   let max = parseInt(sliderMax.value);
   if (min > max) { let t = min; min = max; max = t; sliderMin.value = min; sliderMax.value = max; }
-  const totalRange = sliderMin.max - sliderMin.min;
-  const left = ((min - parseInt(sliderMin.min)) / totalRange) * 100;
-  const right = ((max - parseInt(sliderMin.min)) / totalRange) * 100;
-  rangeFill.style.left = left + '%';
-  rangeFill.style.width = (right - left) + '%';
+  const totalMin = parseInt(sliderMin.min);
+  const totalMax = parseInt(sliderMin.max);
+  const totalRange = totalMax - totalMin;
+  // RTL: right side is the low value (min=2), left side is the high value (max=10)
+  const rightPct = ((min - totalMin) / totalRange) * 100;
+  const leftPct = ((totalMax - max) / totalRange) * 100;
+  rangeFill.style.right = rightPct + '%';
+  rangeFill.style.left = leftPct + '%';
+  rangeFill.style.width = '';
   minLabel.textContent = min;
   maxLabel.textContent = max >= 10 ? '10+' : max;
   applyFilters();
