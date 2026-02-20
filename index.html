@@ -149,6 +149,19 @@
   .badge-easy { background: #d1fae5; color: #065f46; }
   .badge-medium { background: #fef3c7; color: #92400e; }
   .badge-hard { background: #fee2e2; color: #991b1b; }
+  .badge-lotman {
+    background: #fef9c3;
+    color: #854d0e;
+    border: 1px solid #fde68a;
+    border-radius: 6px;
+    padding: 3px 7px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    white-space: nowrap;
+  }
 
   .chevron {
     font-size: 0.85rem;
@@ -269,6 +282,7 @@ const games = [
     players: [2, 8],
     difficulty: "קל",
     time: 15,
+    lotmanPick: true,
     timeText: "10–20 דקות.",
     goal: "להשתחרר מכל הקלפים שבידיך ולהיות האחרון שנשאר ללא קלפים – או לאסוף את כל החפיסה.",
     rules: `• מחלקים את כל החפיסה שווה בשווה בין השחקנים. קלפים לא מסתכלים עליהם ומחזיקים הפוך.
@@ -320,6 +334,7 @@ const games = [
     players: [2, 5],
     difficulty: "בינוני",
     time: 30,
+    lotmanPick: true,
     timeText: "20–40 דקות.",
     goal: "להיפטר מכל הקלפים שבידיך לפני השחקנים האחרים, ולהימנע מלהיות 'שיטהד'.",
     rules: `• בתחילת המשחק כל שחקן מקבל 3 קלפים פתוחים על השולחן, 3 קלפים סגורים מתחתיהם, ו-3 קלפים ביד.
@@ -571,6 +586,7 @@ function renderGames(list) {
       <div class="game-header" onclick="toggleCard(${i})">
         <h2>${g.name}</h2>
         <div class="game-header-meta">
+          ${g.lotmanPick ? '<span class="badge-lotman">⭐ בחירת הלוטם</span>' : ''}
           ${getDiffBadge(g.difficulty)}
           <span class="badge" style="background:#e2e8f0;color:#1e293b;">${g.players[0]}–${g.players[1]} שחקנים</span>
           <span class="chevron">▼</span>
