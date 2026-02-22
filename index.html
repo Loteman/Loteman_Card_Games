@@ -193,6 +193,12 @@
     padding: 3px 10px; font-size: 0.7rem; font-weight: 700;
     display: inline-flex; align-items: center; gap: 3px; white-space: nowrap;
   }
+  .badge-tools   {
+    background: #eff6ff; color: #2563eb;
+    border: 1px solid #93c5fd; border-radius: 20px;
+    padding: 3px 10px; font-size: 0.7rem; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 3px; white-space: nowrap;
+  }
 
   .chevron { font-size: 0.8rem; transition: transform 0.3s; color: #94a3b8; flex-shrink: 0; }
   .game-card.open .chevron { transform: rotate(180deg); }
@@ -390,6 +396,14 @@
         <button class="pill" data-filter="lotman" data-value="true">⭐ בחירת הלוטם בלבד</button>
       </div>
     </div>
+    <div class="panel-category">
+      <span class="cat-label">כלים נוספים</span>
+      <div class="pills">
+        <button class="pill active" data-filter="tools" data-value="">הכל</button>
+        <button class="pill" data-filter="tools" data-value="yes">🔧 עם כלים נוספים</button>
+        <button class="pill" data-filter="tools" data-value="no">חפיסה בלבד</button>
+      </div>
+    </div>
     <div class="panel-category vertical">
       <span class="cat-label">מספר שחקנים</span>
       <div class="slider-wrap">
@@ -473,7 +487,8 @@ const games = [
     wikipedia: "https://en.wikipedia.org/wiki/Blackjack", 
     synonyms: "21, Twenty-One",
     goal: "להגיע לסכום קרוב ככל האפשר ל-21 מבלי לעבור אותו, וגבוה מזה של הדילר.", 
-    rules: `• השחקן והדילר מקבלים 2 קלפים. קלף אחד של הדילר גלוי.\n• אסים שווים 1 או 11, קלפי תמונה שווים 10.\n• השחקן יכול לבקש קלף (Hit) או לעצור (Stand).\n• אם עוברים את 21 - מפסידים אוטומטית (Bust).\n• הדילר חייב למשוך קלפים עד שהוא מגיע ל-17 לפחות.\n• "בלאק ג'ק" (אס ותמונה/10) מנצח מיד ומשלם פי 1.5.` 
+    rules: `• השחקן והדילר מקבלים 2 קלפים. קלף אחד של הדילר גלוי.\n• אסים שווים 1 או 11, קלפי תמונה שווים 10.\n• השחקן יכול לבקש קלף (Hit) או לעצור (Stand).\n• אם עוברים את 21 - מפסידים אוטומטית (Bust).\n• הדילר חייב למשוך קלפים עד שהוא מגיע ל-17 לפחות.\n• "בלאק ג'ק" (אס ותמונה/10) מנצח מיד ומשלם פי 1.5.`, 
+    tools: "סט צ'יפים משחק לכל שחקן.",
   },
   { 
     name: "אייריש סנאפ (Irish Snap)", 
@@ -569,7 +584,8 @@ const games = [
     wikipedia: "https://en.wikipedia.org/wiki/Rummy", 
     synonyms: "Basic Rummy, 500 Rummy",
     goal: "להיפטר מהקלפים ביד על ידי יצירת סדרות (שלישיות) ורצפים.", 
-    rules: `• לוקחים קלף מהקופה או מהערמה הפתוחה וזורקים קלף בסוף כל תור.\n• סדרה: 3-4 קלפים באותו ערך. רצף: 3 קלפים ומעלה מאותו סוג בסדר עולה.\n• ניתן להוריד סדרות לשולחן או להוסיף לסדרות קיימות.\n• המנצח הוא הראשון שנותר ללא קלפים.` 
+    rules: `• לוקחים קלף מהקופה או מהערמה הפתוחה וזורקים קלף בסוף כל תור.\n• סדרה: 3-4 קלפים באותו ערך. רצף: 3 קלפים ומעלה מאותו סוג בסדר עולה.\n• ניתן להוריד סדרות לשולחן או להוסיף לסדרות קיימות.\n• המנצח הוא הראשון שנותר ללא קלפים.`, 
+    tools: "מעמד קלפים לכל שחקן.",
   },
   { 
     name: "סוליטר (Solitaire)", 
@@ -629,7 +645,8 @@ const games = [
     wikipedia: "https://en.wikipedia.org/wiki/Texas_hold_%27em", 
     synonyms: "Hold'em, Texas Poker, פוקר",
     goal: "לזכות בקופה על ידי יצירת יד הקלפים הטובה ביותר או על ידי לגרום לאחרים לפרוש.", 
-    rules: `• כל שחקן מקבל 2 קלפים סגורים. 5 קלפים משותפים נפתחים בהדרגה במרכז.\n• ישנם 4 סיבובי הימורים: לפני הפתיחה (Pre-flop), לאחר 3 קלפים ראשונים (Flop), לאחר הרביעי (Turn) והחמישי (River).\n• שחקנים יכולים להשוות (Call), להעלות (Raise) או לפרוש (Fold).\n• היד הטובה ביותר מורכבת מ-5 קלפים מתוך ה-7 הזמינים (2 ביד + 5 על השולחן).` 
+    rules: `• כל שחקן מקבל 2 קלפים סגורים. 5 קלפים משותפים נפתחים בהדרגה במרכז.\n• ישנם 4 סיבובי הימורים: לפני הפתיחה (Pre-flop), לאחר 3 קלפים ראשונים (Flop), לאחר הרביעי (Turn) והחמישי (River).\n• שחקנים יכולים להשוות (Call), להעלות (Raise) או לפרוש (Fold).\n• היד הטובה ביותר מורכבת מ-5 קלפים מתוך ה-7 הזמינים (2 ביד + 5 על השולחן).`, 
+    tools: "סט צ'יפים משחק (לפחות 50 לשחקן) ושולחן עגול עם מקום נוח.",
   },
   { 
     name: "ספיד (Speed)", 
@@ -701,7 +718,8 @@ const games = [
     wikipedia: "https://en.wikipedia.org/wiki/Contract_bridge", 
     synonyms: "Contract Bridge",
     goal: "לצבור נקודות על ידי זכייה בלקיחות על פי חוזה שנקבע במכרז.", 
-    rules: `• משחק זוגות (צפון-דרום נגד מזרח-מערב).\n• שלב ראשון: הכרזה (Bidding) שבו קובעים כמה לקיחות הזוג מתחייב לקחת ומהו השליט.\n• שלב שני: משחק לקיחות שבו אחד השחקנים (הכרוז) משחק גם עם קלפי שותפו הפרוסים על השולחן.` 
+    rules: `• משחק זוגות (צפון-דרום נגד מזרח-מערב).\n• שלב ראשון: הכרזה (Bidding) שבו קובעים כמה לקיחות הזוג מתחייב לקחת ומהו השליט.\n• שלב שני: משחק לקיחות שבו אחד השחקנים (הכרוז) משחק גם עם קלפי שותפו הפרוסים על השולחן.`, 
+    tools: "פנקס ניקוד ועט.",
   },
   { 
     name: "קסינו (Casino)", 
@@ -771,6 +789,7 @@ function renderGames(list) {
         <div class="game-header-left">
           <div class="game-header-meta">
             ${g.lotmanPick ? '<span class="badge-lotman">⭐ בחירת הלוטם</span>' : ''}
+            ${g.tools ? '<span class="badge-tools">🔧 כלים נוספים</span>' : ''}
             ${diffBadge(g.difficulty)}
             <span class="badge badge-players">${g.players[0]}–${g.players[1]} שחקנים</span>
           </div>
@@ -787,9 +806,11 @@ function renderGames(list) {
         <div class="field"><div class="field-label">כמות שחקנים</div><div class="field-value">${g.players[0]}–${g.players[1]}.</div></div>
         <div class="field"><div class="field-label">רמת קושי</div><div class="field-value">${g.difficulty}.</div></div>
         <div class="field"><div class="field-label">זמן משחק ממוצע</div><div class="field-value">${g.timeText}</div></div>
+        ${g.tools ? `<div class="field"><div class="field-label">🔧 כלים נוספים</div><div class="field-value">${g.tools}</div></div>` : ''}
         <div class="field"><div class="field-label">מהלך המשחק</div>
           <div class="field-value"><ul>${g.rules.trim().split('\n').map(l=>l.trim()).filter(Boolean).map(l=>`<li>${l.replace(/^•\s*/,'')}</li>`).join('')}</ul></div>
         </div>
+        ${g.synonyms ? `<div class="field"><div class="field-label">שמות חלופיים</div><div class="field-value">${g.synonyms.split(',').map(s=>s.trim()).join(', ')}</div></div>` : ''}
       </div></div>
     </div>`).join('');
 }
@@ -802,7 +823,7 @@ function toggleCard(i) {
 }
 
 let currentSort = 'name-asc';
-let activeFilters = { difficulty: '', time: '', lotman: '' };
+let activeFilters = { difficulty: '', time: '', lotman: '', tools: '' };
 
 function applyFilters() {
   const search = document.getElementById('search').value.toLowerCase();
@@ -815,6 +836,8 @@ function applyFilters() {
     if (activeFilters.difficulty && g.difficulty !== activeFilters.difficulty) return false;
     if (activeFilters.time && timeCat(g.time) !== activeFilters.time) return false;
     if (activeFilters.lotman === 'true' && !g.lotmanPick) return false;
+    if (activeFilters.tools === 'yes' && !g.tools) return false;
+    if (activeFilters.tools === 'no'  &&  g.tools) return false;
     if (g.players[0] > maxP || g.players[1] < minP) return false;
     return true;
   });
@@ -898,17 +921,21 @@ function openModal(i) {
   else { wikiBtn.style.display = 'none'; }
   document.getElementById('modal-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  try { history.replaceState(null, '', '#' + gameSlug(g.name)); } catch(e) {}
+  try { history.pushState({ modal: true }, '', '#' + gameSlug(g.name)); } catch(e) {}
 }
 
 function closeModal() {
   document.getElementById('modal-overlay').classList.remove('open');
   document.body.style.overflow = '';
+}
+
+function closeModalAndClearUrl() {
+  closeModal();
   try { history.replaceState(null, '', BASE_URL); } catch(e) {}
 }
 function resetHome() {
   // סגור מסך מלא אם פתוח
-  closeModal();
+  closeModalAndClearUrl();
   // סגור את כל הכרטיסים המורחבים באופן מפורש
   document.querySelectorAll('.game-card.open').forEach(c => c.classList.remove('open'));
   // גלול לראש העמוד
@@ -927,7 +954,15 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // Close modal on Escape key
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalAndClearUrl(); });
+
+// כפתור "קודם" בדפדפן/טלפון — חזרה לדף הבית
+window.addEventListener('popstate', () => {
+  if (document.getElementById('modal-overlay').classList.contains('open')) {
+    closeModal();
+    requestAnimationFrame(() => applyFilters());
+  }
+});
 
 function togglePanel(panelId, btnId) {
   const panel = document.getElementById(panelId);
@@ -954,7 +989,7 @@ function updateSlider() {
 }
 
 function clearFilters() {
-  activeFilters = { difficulty: '', time: '', lotman: '' };
+  activeFilters = { difficulty: '', time: '', lotman: '', tools: '' };
   document.getElementById('slider-min').value = 2;
   document.getElementById('slider-max').value = 10;
   document.querySelectorAll('[data-filter]').forEach(p => p.classList.toggle('active', p.dataset.value === ''));
@@ -1006,7 +1041,7 @@ document.querySelectorAll('[data-sort]').forEach(pill => {
 updateSlider(); // initial render
 </script>
 <div id="modal-overlay">
-  <header onclick="closeModal()" style="cursor:pointer;">
+  <header onclick="resetHome()" style="cursor:pointer;">
     <h1>🃏 משחקי הקלפים של לוטמן</h1>
     <p>הבית של כל משחקי הקלפים שתצטרכו</p>
   </header>
@@ -1014,7 +1049,7 @@ updateSlider(); // initial render
     <h2 id="modal-title"></h2>
   </div>
   <div id="modal-action-bar">
-    <button class="expand-btn" title="חזרה למסך הראשי" onclick="closeModal()">
+    <button class="expand-btn" title="חזרה למסך הראשי" onclick="closeModalAndClearUrl()">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
     </button>
     <button class="expand-btn" id="modal-share-btn" title="שתף משחק">
