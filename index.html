@@ -668,7 +668,9 @@ function openModal(i) {
   document.body.style.top = -scrollY + 'px';
   document.body.style.width = '100%';
   document.body.style.overflowY = 'scroll'; // keep scrollbar visible to avoid layout shift
-  document.getElementById('modal-overlay').classList.add('open');
+  const overlay = document.getElementById('modal-overlay');
+  overlay.scrollTop = 0;
+  overlay.classList.add('open');
   requestAnimationFrame(() => {
     document.querySelectorAll('.footer-suits').forEach(drawSuits);
     document.querySelectorAll('#modal-overlay .header-suits').forEach(drawSuits);
