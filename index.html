@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" async></script>
 <style>
   /* ── Reset ── */
   /* ── Reset ── */
@@ -367,6 +368,19 @@
     .game-body-inner { padding: 16px 18px 20px; }
   }
 
+  /* ── Iconify icons ── */
+  iconify-icon {
+    display: inline-flex;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+  button iconify-icon, a iconify-icon { pointer-events: none; }
+  .filter-group label iconify-icon { font-size: 0.85rem; width: 0.85rem; height: 0.85rem; color: #64748b; }
+  .toggle-btn iconify-icon { font-size: 1rem; width: 1rem; height: 1rem; }
+  .pill iconify-icon { font-size: 0.75rem; width: 0.75rem; height: 0.75rem; }
+  .badge iconify-icon, .badge-lotman iconify-icon, .badge-tools iconify-icon { font-size: 0.75rem; width: 0.75rem; height: 0.75rem; }
+  .expand-btn iconify-icon { font-size: 1.1rem; width: 1.1rem; height: 1.1rem; }
+
   /* ── Modal overlay ── */
   #modal-overlay {
     display: none;
@@ -393,25 +407,25 @@
 <div class="filters">
   <div class="filter-group">
     <label for="search" style="display:flex;align-items:center;gap:5px;">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <iconify-icon icon="mdi:magnify"></iconify-icon>
       חיפוש
     </label>
     <input type="text" id="search" placeholder="חפש משחק...">
   </div>
   <div class="filter-group" style="flex:0;min-width:auto;">
     <label style="opacity:0;pointer-events:none;">‎</label>
-    <div style="position:relative;display:inline-block;"><button class="toggle-btn" id="filter-btn">⚙ סינון</button>
+    <div style="position:relative;display:inline-block;"><button class="toggle-btn" id="filter-btn"><iconify-icon icon="mdi:tune-variant"></iconify-icon> סינון</button>
   <button class="clear-indicator" id="filter-indicator" onclick="clearFilters()">✕ נקה סינון</button>
   </div></div>
   <div class="filter-group" style="flex:0;min-width:auto;">
     <label style="opacity:0;pointer-events:none;">‎</label>
-    <div style="position:relative;display:inline-block;"><button class="toggle-btn" id="sort-btn"><svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><line x1="1" y1="5" x2="11" y2="5"/><line x1="1" y1="10" x2="9" y2="10"/><line x1="1" y1="15" x2="7" y2="15"/><line x1="16" y1="3" x2="16" y2="16"/><polyline points="13,12 16,16 19,12"/></svg> מיון</button>
+    <div style="position:relative;display:inline-block;"><button class="toggle-btn" id="sort-btn"><iconify-icon icon="mdi:sort"></iconify-icon> מיון</button>
   <button class="clear-indicator" id="sort-indicator" onclick="clearSort()">✕ נקה מיון</button>
   </div></div>
   <div class="filter-group" style="flex:0;min-width:auto;">
     <label style="opacity:0;pointer-events:none;">‎</label>
     <button class="toggle-btn" id="random-btn" onclick="openRandomGame()" title="הצע משחק אקראי" style="display:inline-flex;align-items:center;gap:6px;">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/><circle cx="16" cy="8" r="1.2" fill="currentColor"/><circle cx="8" cy="16" r="1.2" fill="currentColor"/><circle cx="16" cy="16" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
+      <iconify-icon icon="mdi:dice-multiple-outline"></iconify-icon>
       הצע משחק אקראי
     </button>
   </div>
@@ -423,9 +437,9 @@
       <span class="cat-label">רמת קושי</span>
       <div class="pills">
         <button class="pill active" data-filter="difficulty" data-value="">הכל</button>
-        <button class="pill" data-filter="difficulty" data-value="קל">קל</button>
-        <button class="pill" data-filter="difficulty" data-value="בינוני">בינוני</button>
-        <button class="pill" data-filter="difficulty" data-value="קשה">קשה</button>
+        <button class="pill" data-filter="difficulty" data-value="קל"><iconify-icon icon="mdi:check"></iconify-icon> קל</button>
+        <button class="pill" data-filter="difficulty" data-value="בינוני"><iconify-icon icon="mdi:fire"></iconify-icon> בינוני</button>
+        <button class="pill" data-filter="difficulty" data-value="קשה"><iconify-icon icon="mdi:lightning-bolt"></iconify-icon> קשה</button>
       </div>
     </div>
     <div class="panel-category">
@@ -441,14 +455,14 @@
       <span class="cat-label">בחירת הלוטמן</span>
       <div class="pills">
         <button class="pill active" data-filter="lotman" data-value="">הכל</button>
-        <button class="pill" data-filter="lotman" data-value="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;vertical-align:middle"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> בחירת הלוטמן בלבד</button>
+        <button class="pill" data-filter="lotman" data-value="true"><iconify-icon icon="mdi:star"></iconify-icon> בחירת הלוטמן בלבד</button>
       </div>
     </div>
     <div class="panel-category">
       <span class="cat-label">כלים נוספים</span>
       <div class="pills">
         <button class="pill active" data-filter="tools" data-value="">הכל</button>
-        <button class="pill" data-filter="tools" data-value="yes"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;vertical-align:middle"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> עם כלים נוספים</button>
+        <button class="pill" data-filter="tools" data-value="yes"><iconify-icon icon="mdi:wrench-outline"></iconify-icon> עם כלים נוספים</button>
         <button class="pill" data-filter="tools" data-value="no">חפיסה בלבד</button>
       </div>
     </div>
@@ -514,10 +528,11 @@
 <script src="games.js"></script>
 
 <script>
+function playersText(p) { return p[0] === p[1] ? p[0] : p[0] + '–' + p[1]; }
 function diffBadge(d) {
-  if (d === 'קל') return '<span class="badge badge-easy"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><polyline points="20 6 9 17 4 12"/></svg> קל</span>';
-  if (d === 'בינוני') return '<span class="badge badge-medium"><svg width="10" height="11" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M12 2c0 0-6 5-6 11a6 6 0 0 0 12 0c0-6-6-11-6-11zm0 4c0 0 3 3.5 3 7a3 3 0 0 1-6 0c0-3.5 3-7 3-7z"/></svg> בינוני</span>';
-  return '<span class="badge badge-hard"><svg width="10" height="11" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> קשה</span>';
+  if (d === 'קל') return '<span class="badge badge-easy"><iconify-icon icon="mdi:check"></iconify-icon> קל</span>';
+  if (d === 'בינוני') return '<span class="badge badge-medium"><iconify-icon icon="mdi:fire"></iconify-icon> בינוני</span>';
+  return '<span class="badge badge-hard"><iconify-icon icon="mdi:lightning-bolt"></iconify-icon> קשה</span>';
 }
 function timeCat(t) { return t <= 20 ? 'short' : t <= 45 ? 'medium' : 'long'; }
 
@@ -531,22 +546,22 @@ function renderGames(list) {
         <h2>${g.name}</h2>
         <div class="game-header-left">
           <div class="game-header-meta">
-            ${g.lotmanPick ? '<span class="badge-lotman"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> בחירת הלוטמן</span>' : ''}
-            ${g.tools ? '<span class="badge-tools"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg> כלים נוספים</span>' : ''}
+            ${g.lotmanPick ? '<span class="badge-lotman"><iconify-icon icon="mdi:star"></iconify-icon> בחירת הלוטמן</span>' : ''}
+            ${g.tools ? '<span class="badge-tools"><iconify-icon icon="mdi:wrench-outline"></iconify-icon> כלים נוספים</span>' : ''}
             ${diffBadge(g.difficulty)}
-            <span class="badge badge-players"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/></svg> ${g.players[0]}–${g.players[1]} שחקנים</span>
+            <span class="badge badge-players"><iconify-icon icon="mdi:account-outline"></iconify-icon> ${playersText(g.players)} שחקנים</span>
           </div>
           <span class="chevron">▼</span>
         </div>
       </div>
       <div class="game-body"><div class="game-body-inner">
         <div style="display:flex; justify-content:flex-end; gap:8px; margin-bottom:10px;">
-          ${g.wikipedia ? `<a class="expand-btn wiki-btn" href="${g.wikipedia}" target="_blank" title="ויקיפדיה" onclick="event.stopPropagation();"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><text x="12" y="16" text-anchor="middle" font-size="11" font-weight="bold" font-family="serif" fill="currentColor" stroke="none">W</text></svg></a>` : ''}
-          <button class="expand-btn share-btn" title="שתף משחק" data-name="${g.name}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
+          ${g.wikipedia ? `<a class="expand-btn wiki-btn" href="${g.wikipedia}" target="_blank" title="ויקיפדיה" onclick="event.stopPropagation();"><iconify-icon icon="mdi:alpha-w-circle-outline"></iconify-icon></a>` : ''}
+          <button class="expand-btn share-btn" title="שתף משחק" data-name="${g.name}"><iconify-icon icon="mdi:share-variant-outline"></iconify-icon></button>
           <button class="expand-btn expand-btn-open" title="הצג מסך מלא" data-name="${g.name}">⛶</button>
         </div>
         <div class="field"><div class="field-label">מטרת המשחק</div><div class="field-value">${g.goal}</div></div>
-        <div class="field"><div class="field-label">כמות שחקנים</div><div class="field-value">${g.players[0]}–${g.players[1]}.</div></div>
+        <div class="field"><div class="field-label">כמות שחקנים</div><div class="field-value">${playersText(g.players)}.</div></div>
         <div class="field"><div class="field-label">רמת קושי</div><div class="field-value">${g.difficulty}.</div></div>
         <div class="field"><div class="field-label">זמן משחק ממוצע</div><div class="field-value">${g.timeText}</div></div>
         ${g.tools ? `<div class="field"><div class="field-label">כלים נוספים</div><div class="field-value">${g.tools}</div></div>` : ''}
@@ -620,13 +635,9 @@ function applyFilters() {
 
 const BASE_URL = 'https://loteman.github.io/Loteman_Card_Games/';
 
-function gameSlug(name) {
-  return encodeURIComponent(name.replace(/\s+/g, '-'));
-}
-
 function shareGame(i) {
   const g = games[i];
-  const url = BASE_URL + '#' + gameSlug(g.name);
+  const url = BASE_URL;
   if (navigator.share) {
     navigator.share({ title: g.name, text: 'בדוק את המשחק: ' + g.name, url });
   } else {
@@ -672,7 +683,7 @@ function openModal(i) {
   document.getElementById('modal-title').textContent = g.name;
   document.getElementById('modal-body').innerHTML = `
     <div class="field"><div class="field-label">מטרת המשחק</div><div class="field-value">${g.goal}</div></div>
-    <div class="field"><div class="field-label">כמות שחקנים</div><div class="field-value">${g.players[0]}–${g.players[1]}.</div></div>
+    <div class="field"><div class="field-label">כמות שחקנים</div><div class="field-value">${playersText(g.players)}.</div></div>
     <div class="field"><div class="field-label">רמת קושי</div><div class="field-value">${g.difficulty}.</div></div>
     <div class="field"><div class="field-label">זמן משחק ממוצע</div><div class="field-value">${g.timeText}</div></div>
     ${g.tools ? `<div class="field"><div class="field-label">כלים נוספים</div><div class="field-value">${g.tools}</div></div>` : ''}
@@ -684,24 +695,31 @@ function openModal(i) {
   const wikiBtn = document.getElementById('modal-wiki-btn');
   if (g.wikipedia) { wikiBtn.href = g.wikipedia; wikiBtn.style.display = 'inline-flex'; }
   else { wikiBtn.style.display = 'none'; }
+  // Freeze background scroll without changing overflow (avoids scrollbar layout shift)
+  const scrollY = window.scrollY;
+  document.body.dataset.scrollY = scrollY;
+  document.body.style.position = 'fixed';
+  document.body.style.top = -scrollY + 'px';
+  document.body.style.width = '100%';
+  document.body.style.overflowY = 'scroll'; // keep scrollbar visible to avoid layout shift
   document.getElementById('modal-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
   requestAnimationFrame(() => document.querySelectorAll('.footer-suits').forEach(drawSuits));
-  try { history.pushState({ modal: true }, '', '#' + gameSlug(g.name)); } catch(e) {}
 }
 
 function closeModal() {
   document.getElementById('modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
+  // Restore scroll position exactly where it was
+  const scrollY = parseFloat(document.body.dataset.scrollY || 0);
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  document.body.style.overflowY = '';
+  window.scrollTo(0, scrollY);
 }
 
-function closeModalAndClearUrl() {
-  closeModal();
-  try { history.replaceState(null, '', BASE_URL); } catch(e) {}
-}
 function resetHome() {
   // סגור מסך מלא אם פתוח
-  closeModalAndClearUrl();
+  closeModal();
   // סגור את כל הכרטיסים המורחבים באופן מפורש
   document.querySelectorAll('.game-card.open').forEach(c => c.classList.remove('open'));
   // גלול לראש העמוד
@@ -710,28 +728,12 @@ function resetHome() {
   applyFilters();
 }
 
-// Open modal directly if URL contains a game hash
-window.addEventListener('DOMContentLoaded', () => {
-  const hash = decodeURIComponent(location.hash.slice(1)).replace(/-/g, ' ');
-  if (hash) {
-    const idx = games.findIndex(g => g.name === hash.replace(/-/g,' '));
-    if (idx !== -1) openModal(idx);
-  }
-});
-
 // Close modal on Escape key
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalAndClearUrl(); });
-
-// כפתור "קודם" בדפדפן/טלפון — חזרה לדף הבית
-window.addEventListener('popstate', () => {
-  if (document.getElementById('modal-overlay').classList.contains('open')) {
-    closeModal();
-    requestAnimationFrame(() => applyFilters());
-  }
-});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 
 // ── Header suits pattern ──
+const _suitSeed = Math.random() * 99999 | 0;
 function drawSuits(svgEl) {
     if (!svgEl) return;
     const W = svgEl.parentElement.offsetWidth  || 800;
@@ -759,13 +761,17 @@ function drawSuits(svgEl) {
       `<path transform="scale(2)" d="M50 5 C20 35,5 50,20 70 A20 20 0 0 0 45 60 L45 85 L55 85 L55 60 A20 20 0 0 0 80 70 C95 50,80 35,50 5 Z"/>`,
     ];
 
+    // Align grid so last row reaches exactly the bottom of the element
+    const SUIT_H = 200 * scale; // approximate max suit height in viewBox coords
+    const startY = -(SIZE - (H - SUIT_H) % SIZE);
+
     let out = '';
     for (let row = 0; row < ROWS; row++) {
       for (let col = 0; col < COLS; col++) {
         const ox = (row % 2 === 1) ? HALF : 0;
         const cx = col * SIZE + ox - HALF;
-        const cy = row * SIZE - HALF;
-        const si = Math.floor(Math.random() * 4);
+        const cy = row * SIZE + startY;
+        const si = Math.abs(Math.floor(Math.sin(row * 127.1 + col * 311.7 + _suitSeed) * 43758.5453)) % 4;
         out += `<g fill="white" transform="translate(${cx},${cy}) scale(${scale})">${suits[si]}</g>`;
       }
     }
@@ -792,6 +798,8 @@ function drawSuits(svgEl) {
   } else {
     drawAll();
   }
+  document.fonts.ready.then(drawAll);
+  window.addEventListener('resize', drawAll);
 
 function togglePanel(panelId, btnId) {
   const panel = document.getElementById(panelId);
@@ -881,13 +889,13 @@ updateSlider(); // initial render
     <h2 id="modal-title"></h2>
   </div>
   <div id="modal-action-bar">
-    <button class="expand-btn" title="חזרה למסך הראשי" onclick="closeModalAndClearUrl()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="10" y1="14" x2="3" y2="21"/><line x1="21" y1="3" x2="14" y2="10"/></svg>
+    <button class="expand-btn" title="חזרה למסך הראשי" onclick="closeModal()">
+      <iconify-icon icon="mdi:arrow-collapse-all"></iconify-icon>
     </button>
     <button class="expand-btn" id="modal-share-btn" title="שתף משחק">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      <iconify-icon icon="mdi:share-variant-outline"></iconify-icon>
     </button>
-    <a class="expand-btn wiki-btn" id="modal-wiki-btn" href="#" target="_blank" title="ויקיפדיה"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><text x="12" y="16" text-anchor="middle" font-size="11" font-weight="bold" font-family="serif" fill="currentColor" stroke="none">W</text></svg></a>
+    <a class="expand-btn wiki-btn" id="modal-wiki-btn" href="#" target="_blank" title="ויקיפדיה"><iconify-icon icon="mdi:alpha-w-circle-outline"></iconify-icon></a>
   </div>
   <div id="modal-body"></div>
   <footer>
