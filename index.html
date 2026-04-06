@@ -105,7 +105,7 @@
     max-width: 960px; margin: 0 auto; padding: 0 20px;
     overflow: hidden; max-height: 0; transition: max-height 0.35s ease, margin 0.35s ease;
   }
-  .collapsible-panel.open { max-height: 420px; margin-top: 12px; }
+  .collapsible-panel.open { max-height: min(700px, 85vh); margin-top: 12px; }
   .panel-inner {
     background: #fff; border-radius: 14px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.06);
@@ -320,6 +320,10 @@
   .badge iconify-icon, .badge-lotman iconify-icon, .badge-tools iconify-icon { font-size: 0.75rem; width: 0.75rem; height: 0.75rem; }
   .expand-btn iconify-icon { font-size: 1.1rem; width: 1.1rem; height: 1.1rem; }
 
+  /* ── Modal banner (smaller, no subtitle) ── */
+  header.modal-banner { padding: 16px 24px; }
+  header.modal-banner h1 { font-size: 1.4rem; }
+
   /* ── Modal overlay ── */
   #modal-overlay {
     display: none;
@@ -465,6 +469,29 @@
 <div class="games-container" id="games-container"></div>
 
 <script src="games.js"></script>
+<script>
+// Fallback if games.js failed to load
+if (typeof games === 'undefined') {
+  console.warn('games.js failed to load — using fallback test data');
+  window.games = [
+    {
+      name: "[TEST] משחק לדיבאג",
+      players: [2, 5],
+      difficulty: "קל",
+      time: 25,
+      timeText: "20–40 דקות.",
+      lotmanPick: true,
+      tools: null,
+      wikipedia: "https://en.wikipedia.org/",
+      synonyms: "Test Game",
+      goal: "⚠️ games.js לא נטען. זהו משחק דמה לצורך דיבאג בלבד.",
+      rules: `• בדוק שקובץ games.js קיים בתיקייה
+• בדוק שהנתיב בתג script נכון
+• בדוק את ה-Console לשגיאות טעינה`
+    }
+  ];
+}
+</script>
 
 <script>
 function playersText(p) { return p[0] === p[1] ? p[0] : p[0] + '–' + p[1]; }
@@ -642,7 +669,10 @@ function openModal(i) {
   document.body.style.width = '100%';
   document.body.style.overflowY = 'scroll'; // keep scrollbar visible to avoid layout shift
   document.getElementById('modal-overlay').classList.add('open');
-  requestAnimationFrame(() => document.querySelectorAll('.footer-suits').forEach(drawSuits));
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.footer-suits').forEach(drawSuits);
+    document.querySelectorAll('#modal-overlay .header-suits').forEach(drawSuits);
+  });
 }
 
 function closeModal() {
@@ -819,10 +849,9 @@ document.querySelectorAll('[data-sort]').forEach(pill => {
 updateSlider(); // initial render
 </script>
 <div id="modal-overlay">
-  <header onclick="resetHome()" style="cursor:pointer;">
+  <header class="modal-banner" onclick="resetHome()" style="cursor:pointer;">
     <svg class="header-suits" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"></svg>
     <h1 style="position:relative;">🃏 משחקי הקלפים של לוטמן</h1>
-    <p style="position:relative;">הבית של כל משחקי הקלפים</p>
   </header>
   <div id="modal-header">
     <h2 id="modal-title"></h2>
