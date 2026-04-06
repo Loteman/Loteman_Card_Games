@@ -8,12 +8,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" async></script>
 <style>
-  /* ── Reset ── */
   /* ── Reset ── */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -82,7 +78,7 @@
     box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
   }
 
-  /* ── Toggle buttons (סינון / מיון) ── */
+  /* ── Toggle buttons ── */
   .toggle-btn {
     padding: 9px 18px;
     background: #fff;
@@ -272,59 +268,6 @@
     color: #ffffff;
     text-shadow: 0 1px 4px rgba(0,0,0,0.7);
   }
-
-  /* ── Action buttons (expand / share / wiki) ── */
-  .expand-btn {
-    background: none; border: none; cursor: pointer; color: #cbd5e1;
-    font-size: 1rem; padding: 4px 5px; transition: color 0.15s; flex-shrink: 0;
-    line-height: 1; border-radius: 6px;
-  }
-  .expand-btn:hover { color: #475569; background: #f1f5f9; }
-  .wiki-btn { text-decoration: none; display: inline-flex; align-items: center; }
-
-  /* ── Modal ── */
-
-  #modal-header {
-    background: linear-gradient(135deg, #1a2035 0%, #2d3f5e 100%);
-    color: #fff; padding: 16px 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 10;
-  }
-  #modal-header h2 { font-size: 1.1rem; font-weight: 700; text-align: center; flex: 1; letter-spacing: -0.01em; }
-  #modal-back {
-    background: none; border: none; color: #fff; cursor: pointer;
-    font-family: inherit; font-size: 0.88rem; display: flex; align-items: center;
-    gap: 6px; padding: 6px 12px; border-radius: 8px; transition: background 0.2s;
-    flex-shrink: 0; width: 140px;
-  }
-  #modal-back:hover { background: rgba(255,255,255,0.12); }
-
-  #modal-body { max-width: 760px; margin: 32px auto; padding: 0 24px 48px; }
-  #modal-action-bar {
-    display: flex; justify-content: flex-start; gap: 8px;
-    direction: ltr !important;
-    padding: 14px max(24px, calc((100% - 760px) / 2 + 24px)) 0 max(24px, calc((100% - 760px) / 2 + 24px));
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 600px) {
-    header h1 { font-size: 1.5rem; }
-    .filters { gap: 10px; }
-    .game-body-inner { padding: 16px 18px 20px; }
-  }eld-value ul { padding-right: 20px; }
-  .field-value li { margin-bottom: 5px; }
-
-  .no-results { text-align: center; padding: 48px; color: #94a3b8; font-size: 1rem; }
-
-  /* ── Footer ── */
-  footer {
-    background: linear-gradient(135deg, #1a2035 0%, #2d3f5e 100%);
-    color: #64748b;
-    text-align: center;
-    padding: 20px;
-    font-size: 0.82rem;
-    letter-spacing: 0.03em;
-  }
   footer a { color: #ffffff; }
 
   /* ── Action buttons (expand / share / wiki) ── */
@@ -337,12 +280,12 @@
   .wiki-btn { text-decoration: none; display: inline-flex; align-items: center; }
 
   /* ── Modal ── */
-
   #modal-header {
     background: #f8fafc;
     color: #1a2035; padding: 16px 24px;
     display: flex; align-items: center; justify-content: center;
     border-bottom: 1px solid #f1f5f9;
+    position: sticky; top: 0; z-index: 10;
   }
   #modal-header h2 {
     font-size: 1.1rem; font-weight: 700; text-align: center;
@@ -350,16 +293,12 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     padding: 0 12px; max-width: 100%;
   }
-  #modal-back {
-    background: none; border: none; color: #fff; cursor: pointer;
-    font-family: inherit; font-size: 0.88rem; display: flex; align-items: center;
-    gap: 6px; padding: 6px 12px; border-radius: 8px; transition: background 0.2s;
-    flex-shrink: 0; width: 140px;
-  }
-  #modal-back:hover { background: rgba(255,255,255,0.12); }
-
   #modal-body { max-width: 760px; margin: 32px auto; padding: 0 24px 48px; }
-
+  #modal-action-bar {
+    display: flex; justify-content: flex-start; gap: 8px;
+    direction: ltr !important;
+    padding: 14px max(24px, calc((100% - 760px) / 2 + 24px)) 0 max(24px, calc((100% - 760px) / 2 + 24px));
+  }
 
   /* ── Responsive ── */
   @media (max-width: 600px) {
@@ -718,13 +657,13 @@ function closeModal() {
 }
 
 function resetHome() {
-  // סגור מסך מלא אם פתוח
+  // Close fullscreen modal if open
   closeModal();
-  // סגור את כל הכרטיסים המורחבים באופן מפורש
+  // Close all expanded cards
   document.querySelectorAll('.game-card.open').forEach(c => c.classList.remove('open'));
-  // גלול לראש העמוד
+  // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // רנדר מחדש — בונה DOM חדש לגמרי עם אנימציה
+  // Re-render with animation
   applyFilters();
 }
 
@@ -779,7 +718,7 @@ function drawSuits(svgEl) {
   }
 
   function drawAll() {
-    // צייר פעם אחת לפי הכותרת הראשית, ואז שכפל לשאר הכותרות
+    // Draw main header first, then clone pattern to all other headers
     const mainHeader = document.querySelector('body > header .header-suits');
     drawSuits(mainHeader);
     const sharedPattern = mainHeader ? mainHeader.innerHTML : '';
