@@ -1,6 +1,6 @@
 # Loteman Card Games
 Useful card game database website
 
-[https://loteman.github.io/Loteman_Card_Games/](https://loteman.github.io/Loteman_Card_Games/)
+[https://cardgames.loteman.com/](https://cardgames.loteman.com/)
 
-Game By [LotemanGames](https://loteman.github.io/Loteman-Games/)
+Game By [LotemanGames](https://games.loteman.com/)
