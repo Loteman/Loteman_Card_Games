@@ -413,14 +413,14 @@
       <span class="cat-label">מספר שחקנים</span>
       <div class="slider-wrap">
         <div class="slider-labels">
-          <span id="slider-min-label">2</span>
+          <span id="slider-min-label">1</span>
           <span id="slider-max-label">10+</span>
         </div>
         <div class="range-slider-container">
           <div class="track"></div>
           <div class="range-fill" id="range-fill"></div>
-          <input type="range" id="slider-min" min="2" max="10" value="2" step="1">
-          <input type="range" id="slider-max" min="2" max="10" value="10" step="1">
+          <input type="range" id="slider-min" min="1" max="10" value="1" step="1">
+          <input type="range" id="slider-max" min="1" max="10" value="10" step="1">
         </div>
       </div>
     </div>
@@ -555,7 +555,7 @@ function updateClearIndicators() {
   const sortPanelOpen   = document.getElementById('sort-panel')?.classList.contains('open');
 
   const hasFilter = activeFilters.difficulty || activeFilters.time || activeFilters.lotman || activeFilters.tools ||
-    parseInt(document.getElementById('slider-min').value) > 2 ||
+    parseInt(document.getElementById('slider-min').value) > 1 ||
     parseInt(document.getElementById('slider-max').value) < 10;
   const fi = document.getElementById('filter-indicator');
   if (fi) fi.classList.toggle('visible', !!hasFilter && !filterPanelOpen);
@@ -601,9 +601,15 @@ function applyFilters() {
 
 const BASE_URL = 'https://cardgames.loteman.com/';
 
+// URL slug from the English name in parentheses: "יניב (Yaniv)" → "yaniv"
+function gameSlug(g) {
+  const m = g.name.match(/\(([^)]+)\)/);
+  return (m ? m[1] : g.name).toLowerCase().replace(/['’]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
 function shareGame(i) {
   const g = games[i];
-  const url = BASE_URL;
+  const url = BASE_URL + '#' + gameSlug(g);
   if (navigator.share) {
     navigator.share({ title: g.name, text: 'בדוק את המשחק: ' + g.name, url });
   } else {
@@ -644,8 +650,11 @@ function shareGameByName(name) {
   if (i !== -1) shareGame(i);
 }
 
-function openModal(i) {
+function openModal(i, push = true) {
   const g = games[i];
+  const slug = gameSlug(g);
+  // Give the modal its own history entry so the phone's back button closes it
+  if (push && location.hash !== '#' + slug) history.pushState({ modal: slug }, '', '#' + slug);
   document.getElementById('modal-title').textContent = g.name;
   document.getElementById('modal-body').innerHTML = `
     <div class="field"><div class="field-label">מטרת המשחק</div><div class="field-value">${g.goal}</div></div>
@@ -661,14 +670,17 @@ function openModal(i) {
   const wikiBtn = document.getElementById('modal-wiki-btn');
   if (g.wikipedia) { wikiBtn.href = g.wikipedia; wikiBtn.style.display = 'inline-flex'; }
   else { wikiBtn.style.display = 'none'; }
-  // Freeze background scroll without changing overflow (avoids scrollbar layout shift)
-  const scrollY = window.scrollY;
-  document.body.dataset.scrollY = scrollY;
-  document.body.style.position = 'fixed';
-  document.body.style.top = -scrollY + 'px';
-  document.body.style.width = '100%';
-  document.body.style.overflowY = 'scroll'; // keep scrollbar visible to avoid layout shift
   const overlay = document.getElementById('modal-overlay');
+  // Freeze background scroll without changing overflow (avoids scrollbar layout shift).
+  // Skip when already open (switching games) — the page is already frozen at the saved spot.
+  if (!overlay.classList.contains('open')) {
+    const scrollY = window.scrollY;
+    document.body.dataset.scrollY = scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = -scrollY + 'px';
+    document.body.style.width = '100%';
+    document.body.style.overflowY = 'scroll'; // keep scrollbar visible to avoid layout shift
+  }
   overlay.scrollTop = 0;
   overlay.classList.add('open');
   requestAnimationFrame(() => {
@@ -678,7 +690,9 @@ function openModal(i) {
 }
 
 function closeModal() {
-  document.getElementById('modal-overlay').classList.remove('open');
+  const overlay = document.getElementById('modal-overlay');
+  if (!overlay.classList.contains('open')) return;
+  overlay.classList.remove('open');
   // Restore scroll position exactly where it was
   const scrollY = parseFloat(document.body.dataset.scrollY || 0);
   document.body.style.position = '';
@@ -688,9 +702,25 @@ function closeModal() {
   window.scrollTo(0, scrollY);
 }
 
+// Close from the UI: also drop the modal's history entry / game hash
+function exitModal() {
+  closeModal();
+  if (history.state && history.state.modal) history.back();
+  else if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+}
+
+// Open the game named in the URL hash, or close the modal if there is none
+function syncModalWithHash() {
+  const slug = decodeURIComponent(location.hash.slice(1));
+  const i = slug ? games.findIndex(g => gameSlug(g) === slug) : -1;
+  if (i !== -1) openModal(i, false);
+  else closeModal();
+}
+window.addEventListener('popstate', syncModalWithHash);
+
 function resetHome() {
   // Close fullscreen modal if open
-  closeModal();
+  exitModal();
   // Close all expanded cards
   document.querySelectorAll('.game-card.open').forEach(c => c.classList.remove('open'));
   // Scroll to top
@@ -700,7 +730,9 @@ function resetHome() {
 }
 
 // Close modal on Escape key
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.getElementById('modal-overlay').classList.contains('open')) exitModal();
+});
 
 
 // ── Header suits pattern ──
@@ -799,7 +831,7 @@ function updateSlider() {
 
 function clearFilters() {
   activeFilters = { difficulty: '', time: '', lotman: '', tools: '' };
-  document.getElementById('slider-min').value = 2;
+  document.getElementById('slider-min').value = 1;
   document.getElementById('slider-max').value = 10;
   document.querySelectorAll('[data-filter]').forEach(p => p.classList.toggle('active', p.dataset.value === ''));
   updateSlider();
@@ -849,6 +881,8 @@ document.querySelectorAll('[data-sort]').forEach(pill => {
 });
 
 updateSlider(); // initial render
+// Shared link (#yaniv) → open that game; the modal markup sits below this script
+document.addEventListener('DOMContentLoaded', syncModalWithHash);
 </script>
 <div id="modal-overlay">
   <header class="modal-banner" onclick="resetHome()" style="cursor:pointer;">
@@ -859,7 +893,7 @@ updateSlider(); // initial render
     <h2 id="modal-title"></h2>
   </div>
   <div id="modal-action-bar">
-    <button class="expand-btn" title="חזרה למסך הראשי" onclick="closeModal()">
+    <button class="expand-btn" title="חזרה למסך הראשי" onclick="exitModal()">
       <iconify-icon icon="mdi:arrow-collapse-all"></iconify-icon>
     </button>
     <button class="expand-btn" id="modal-share-btn" title="שתף משחק">

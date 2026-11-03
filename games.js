@@ -324,7 +324,7 @@ const games = [
   { 
     name: "ברידג' (Bridge)", 
     players: [4, 4], 
-    difficulty: "קשה מאוד", 
+    difficulty: "קשה", 
     time: 90, 
     timeText: "60–120 דקות.", 
     lotmanPick: false, 
